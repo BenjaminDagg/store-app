@@ -132,3 +132,5 @@ const start = async function() {
 };
 
 start();
+
+/* start: react-scripts start */

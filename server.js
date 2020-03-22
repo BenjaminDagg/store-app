@@ -2,7 +2,9 @@ const Hapi = require("hapi");
 const Mongoose = require("mongoose");
 const Joi = require("joi");
 var corsHeaders = require('hapi-cors-headers');
-const url = "mongodb+srv://ben:myxboxname1996@cluster0-wjntd.mongodb.net/store"
+const url = "mongodb+srv://ben:myxboxname1996@cluster0-wjntd.mongodb.net/store";
+const Inert = require('inert');
+const Path = require('path');
 
 const GameController = require("./src/controllers/games");
 const AlbumController = require("./src/controllers/albums");
@@ -24,9 +26,15 @@ const MusicModel = Mongoose.model("albums", {
 const server = new Hapi.server({
     port:5000,
     host:'localhost',
-    routes: { cors: true }
+    routes: { 
+        files: {
+            relativeTo: Path.join(__dirname, "./build")
+        }
+     }
     
 });
+
+
 
 /*  ============== GAMES =========================*/
 // GET list of all games
@@ -115,6 +123,9 @@ server.route({
 })
 
 
+
+
+
 const start = async function() {
     try {
         await server.register({
@@ -123,6 +134,20 @@ const start = async function() {
                 origins: ['*']
             }
         })
+
+        await server.register(Inert);
+
+        server.route({
+            method: 'GET',
+            path: '/{param*}',
+            handler: {
+                directory: {
+                    path: Path.join(__dirname, "/build/index.html"),
+                    redirectToSlash: true,
+                    index: true,
+                }
+            }
+        });
  
         await server.start();
     } catch(err) {
@@ -130,5 +155,7 @@ const start = async function() {
         process.exit(1);
     }
 };
+
+
 
 start();
