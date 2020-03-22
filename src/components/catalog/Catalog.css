@@ -1,0 +1,16 @@
+.store-catalog {
+    
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    margin-top: 30px;
+}
+
+.catalog-item {
+    
+    background-color: lightpink;
+    height: 150px;
+    margin: 15px;
+}
