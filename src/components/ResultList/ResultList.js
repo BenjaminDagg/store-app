@@ -52,7 +52,7 @@ export class ResultList extends Component {
     }
 
     getItems(query) {
-        axios.get('http://localhost:5000' + query)
+        axios.get('https://store-app-dagg.herokuapp.com/' + query)
         .then(res => {
             console.log(res);
             
