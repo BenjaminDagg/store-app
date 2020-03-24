@@ -24,6 +24,8 @@ exports.get = async (req,h) => {
     var result = [];
     var games =  await Game.find().exec();
     var albums = await Album.find().exec();
+    var  movies = await Movie.find().exec();
+
     games.forEach((game) => {
         if (game.title.toLowerCase().includes(query) ||
             game.developer.toLowerCase().includes(query) ||
@@ -39,6 +41,26 @@ exports.get = async (req,h) => {
             query.toLowerCase().includes("album")) {
                 result.push(album);
             }
+    })
+    movies.forEach((movie)  => {
+        var wasAdded = false ;
+        if (movie.title.toLowerCase().includes(query) ||
+            movie.director.toLowerCase().includes(query)  ||
+            query.toLowerCase().includes("movie")   ||
+            movie.actors.includes(query))  {
+                result.push(movie);
+                wasAdded = true;
+        }
+        if (!wasAdded ){
+             var actors = movie.actors;
+             actors.forEach((actor)  => {
+                 if (actor.toLowerCase().includes(query) && !wasAdded) {
+                     result.push(movie);
+                     wasAdded  = true;
+                 }
+             })
+        }
+        
     })
     return {data:result};
 }
