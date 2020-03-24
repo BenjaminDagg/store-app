@@ -12,7 +12,7 @@ exports.list = (req,h) => {
 
 }
 
-//GET game by id
+//GET movie by id
 exports.get = (req,h) => {
     var id = parseInt(req.params.id);
     

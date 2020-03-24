@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Catalog.css";
 import {filterTypes} from "../../models/FilterTypes.js";
+// eslint-disable-next-line
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 export class Catalog extends Component {

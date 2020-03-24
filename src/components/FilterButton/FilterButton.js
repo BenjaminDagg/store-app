@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
-import axios from 'axios';
-import {Catalog} from "../catalog/Catalog.js";
 import "./FilterButton.css";
 import {filterTypes} from "../../models/FilterTypes.js";
 

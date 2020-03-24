@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';  
 import axios from 'axios';
 import {Catalog} from "../catalog/Catalog.js";
 import {FilterButton} from "../FilterButton/FilterButton.js";
@@ -26,7 +25,8 @@ export class ResultList extends Component {
 
         //parse the query to call api
         var url = window.location.href;
-        //removes hostname from url
+        //removes hostname from url // eslint-disable-next-line
+        // eslint-disable-next-line
         url = "/" + url.replace (/^[a-z]{4,5}\:\/{2}[a-z]{1,}\:[0-9]{1,4}.(.*)/, '$1');
         //removes '/products' from url
         url = url.substring(9,url.length);
