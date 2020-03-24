@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./SideBar.css";
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 const platforms = {
     PC: 'PC',
@@ -19,6 +20,7 @@ export class SideBar extends Component {
 
         this.onSubmit = this.onSubmit.bind(this);
         this.onPlatformChange = this.onPlatformChange.bind(this);
+        this.resetFilters = this.resetFilters.bind(this);
     }
 
     componentDidMount() {
@@ -42,6 +44,12 @@ export class SideBar extends Component {
         var platform = event.target.value
         
         this.setState({platform:platform});
+    }
+
+    resetFilters() {
+        var url = "";
+
+        
     }
 
     render() {
@@ -83,7 +91,7 @@ export class SideBar extends Component {
                             </div>
                         </div>
                     }
-                    {this.props.category === 'all' &&
+                    {(this.props.category === 'all'  ||  this.props.category === 'search')  &&
                         <div>
                             <div>
                                 <h6>Products</h6>
@@ -100,8 +108,9 @@ export class SideBar extends Component {
                         to
                         <input className="price-input" type="text" name="priceHigh" id="priceHigh" placeholder="max."></input>
                     </div>
-                    <input type="submit"/>
+                    <input type="submit"/><a href={this.props.category === "all" ? "/products" : "/products/" + this.props.category}>Reset</a>
                 </form>
+                
             </div>
         );
     }

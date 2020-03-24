@@ -20,7 +20,9 @@ exports.list = async (req,h) => {
 exports.get = async (req,h) => {
     
     var query = req.query.query;
-    console.log(query);
+    var params = req.query;
+    
+    console.log(params);
     var result = [];
     var games =  await Game.find().exec();
     var albums = await Album.find().exec();
@@ -62,5 +64,49 @@ exports.get = async (req,h) => {
         }
         
     })
+    
+    
+
     return {data:result};
+}
+
+
+//GETS filtered list of products
+exports.filter = async (req,h) => {
+    
+    var params = req.query;
+    console.log(params);
+    if (!params.priceMin) {
+        params.priceMin = -1000
+    }
+    else {
+        params.priceMin = parseFloat(params.priceMin)
+    }
+    if (!params.priceHigh) {
+        params.priceHigh = 1000
+    }
+    else {
+        params.priceHigh = parseFloat(params.priceHigh);
+    }
+    console.log(params);
+    
+    var result = [];
+    var games =  await Game.find().exec();
+    var albums = await Album.find().exec();
+    var  movies = await Movie.find().exec();
+
+    
+    var temp = games.concat(albums);
+    var res = temp.concat(movies);
+    
+    var products = [];
+
+    //only get games in price range
+    res.forEach((element) => {
+        if (element.price >= params.priceMin && element.price <= params.priceHigh) {
+            products.push(element);
+        }
+    })
+
+    return {data:products};
 }

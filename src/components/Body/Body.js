@@ -19,6 +19,7 @@ export class Body extends Component {
                 
                     <div>
                         <Route exact={true} path={"/"} render={() => <Home/>} />
+                        <Route exact={true} path={"/products"} render={(props) => <ResultList {...props} />} />
                         <Route  path={"/products/:category"} render={(props) => <ResultList {...props} />} />
                         <Route  path={"/product/:category/:id"} render={(props) => <ProductDetails {...props} />} />
                     </div>

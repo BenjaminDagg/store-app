@@ -113,6 +113,12 @@ server.route({
     handler: ProductController.list
 })
 
+server.route({
+    method: 'GET',
+    path: '/products/filter',
+    handler: ProductController.filter
+})
+
 
 const start = async function() {
     try {

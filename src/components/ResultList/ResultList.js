@@ -44,14 +44,21 @@ export class ResultList extends Component {
             url = "/products/search?query=" + search;
             console.log('query = ' + query);
         }
-        if (category === 'all') {
+        if (category === undefined) {
             url = "/products";
+            category = "all";
         }
+        if (category === 'filter') {
+            url = "/products" + url;
+            category = "all";
+        }
+        console.log('url = ' + url);
         this.setState({category: category});
         this.getItems(url);
     }
 
     getItems(query) {
+        console.log('query in func =  ' + query);
         axios.get('http://localhost:5000' + query)
         .then(res => {
             console.log(res);
