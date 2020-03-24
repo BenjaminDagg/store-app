@@ -122,7 +122,7 @@ const start = async function() {
             path: '/{path*}',
             handler: {
                 directory: {
-                    path: Path.join(__dirname, './build/'),
+                    path: Path.join(__dirname, './build'),
                     listing: false,
                     index: true
                 }
