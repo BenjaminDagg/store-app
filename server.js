@@ -1,9 +1,9 @@
-const Hapi = require("hapi");
+const Hapi = require("@hapi/hapi");
 const Mongoose = require("mongoose");
 const Joi = require("joi");
 var corsHeaders = require('hapi-cors-headers');
 const url = "mongodb+srv://ben:myxboxname1996@cluster0-wjntd.mongodb.net/store"
-
+const Path = require('path');
 const GameController = require("./src/controllers/games");
 const AlbumController = require("./src/controllers/albums");
 const ProductController = require("./src/controllers/products.js");
@@ -12,13 +12,6 @@ const MovieController = require("./src/controllers/movies");
 Mongoose.connect(url , {useNewUrlParser: true, useUnifiedTopology: true});
 
 
-const GameModel = Mongoose.model("games", {
-    title: String
-});
-
-const MusicModel = Mongoose.model("albums", {
-    artist: String
-});
 
 
 const server = new Hapi.server({
@@ -123,7 +116,18 @@ const start = async function() {
                 origins: ['*']
             }
         })
-
+        await server.register(require('@hapi/inert'));
+        server.route({
+            method: 'GET',
+            path: '/{path*}',
+            handler: {
+                directory: {
+                    path: Path.join(__dirname, '/build/index.html'),
+                    listing: false,
+                    index: true
+                }
+            }
+        })
         await server.start();
     } catch(err) {
         console.log(err);
