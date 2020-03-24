@@ -20,7 +20,7 @@ export class Catalog extends Component {
 
     sort() {
         
-        if (this.props.filter == filterTypes.ALPHA) {
+        if (this.props.filter === filterTypes.ALPHA) {
             this.props.onFilterChange(filterTypes.PRICE)
         }
         else {

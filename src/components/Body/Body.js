@@ -4,6 +4,7 @@ import { Header } from "../Header/Header.js";
 import {Home} from "../Home/Home.js";
 import { ProductDetails } from "../ProductDetails/ProductDetails.js";
 import { ResultList } from "../ResultList/ResultList.js";
+// eslint-disable-next-line
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 export class Body extends Component {
