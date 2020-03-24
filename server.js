@@ -87,6 +87,12 @@ server.route({
     handler: MovieController.get
 })
 
+server.route({
+    method: 'GET',
+    path: "/movies/filter",
+    handler: MovieController.filter
+})
+
 
 /*  ============== PRODUCTS =========================*/
 server.route({

@@ -21,3 +21,61 @@ exports.get = (req,h) => {
         return {data: movie};
     })
 }
+
+//GET list of movies with filters
+exports.filter = (req,h) => {
+    var params = req.query;
+    if (!params.name) {
+        params.name = ""
+    }
+    if (!params.genre) {
+        params.genre = ""
+    }
+    if (!params.priceMin) {
+        params.priceMin = -1000
+    }
+    else {
+        params.priceMin = parseFloat(params.priceMin)
+    }
+    if (!params.priceHigh) {
+        params.priceHigh = 1000
+    }
+    else {
+        params.priceHigh = parseFloat(params.priceHigh);
+    }
+    if (!params.score) {
+        params.score = 1;
+    }
+    else {
+        params.score = parseFloat(params.score);
+    }
+    if (!params.rating) {
+        params.rating  = ""
+    }
+    if (!params.genre)  {
+        params.genre = "";
+    }
+    console.log(params);
+    return Movie.find({
+        $and:[
+            {'title':{"$regex": params.name,"$options":"i"}},
+            {'rating':{"$regex": params. rating,"$options":"i"}},
+            {'genre':{"$regex": params.genre,"$options":"i"}}
+        ]
+    }).exec().then((movie) => {
+        var res = [];
+
+        //only get games in price range
+        movie.forEach((element) => {
+            if (element.price >= params.priceMin && element.price <= params.priceHigh &&  element.score >= params.score) {
+                res.push(element);
+            }
+        })
+
+        return {data: res};
+    })
+
+    
+    
+    
+}
