@@ -17,7 +17,11 @@ Mongoose.connect(url , {useNewUrlParser: true, useUnifiedTopology: true});
 const server = new Hapi.server({
     port:5000,
     host:'localhost',
-    routes: { cors: true }
+    routes: { 
+        files: {
+            relativeTo: Path.join(__dirname, '/build')
+        }
+     }
 
 });
 
@@ -120,13 +124,10 @@ const start = async function() {
         server.route({
             method: 'GET',
             path: '/{path*}',
-            handler: {
-                directory: {
-                    path: Path.join(__dirname, '/build/index.html'),
-                    listing: false,
-                    index: true
-                }
-            }
+            handler: function(req,h)  {
+                return h.file('index.html')
+            } 
+            
         })
         await server.start();
     } catch(err) {
