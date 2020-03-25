@@ -143,6 +143,7 @@ const start = async function() {
             
         })
         await server.start();
+        console.log('server started');
     } catch(err) {
         console.log(err);
         process.exit(1);
