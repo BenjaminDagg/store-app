@@ -15,7 +15,7 @@ Mongoose.connect(url , {useNewUrlParser: true, useUnifiedTopology: true});
 
 
 const server = new Hapi.server({
-    port:5000,
+    port: process.env.PORT || 5000,
     host:'localhost',
     
 
