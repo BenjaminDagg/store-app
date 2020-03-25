@@ -140,7 +140,7 @@ const start = async function() {
             }
         })
         await server.register(require('@hapi/inert'));
-        
+        await server.register(require('hapi-require-https'));
         server.route({
             method: 'GET',
             path: '/{any*}',
