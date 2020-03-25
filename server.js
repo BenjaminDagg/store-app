@@ -23,7 +23,6 @@ app.get('/*', function (req, res) {
 
 const server = new Hapi.server({
     port: process.env.PORT || 5000,
-    host:'0.0.0.0',
     routes:  {
         files: {
             relativeTo: Path.join(__dirname, 'build')
