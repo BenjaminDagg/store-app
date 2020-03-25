@@ -42,7 +42,7 @@ server.route({
         }
     },
     method: "GET",
-    path: "/api/games",
+    path: "/games",
     handler: GameController.list
 });
 
