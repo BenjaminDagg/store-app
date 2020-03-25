@@ -120,6 +120,8 @@ server.route({
 })
 
 
+
+
 const start = async function() {
     try {
         await server.register({
@@ -134,9 +136,8 @@ const start = async function() {
             path: '/{path*}',
             handler: {
                 directory: {
-                    path: Path.join(__dirname, './build'),
-                    listing: false,
-                    index: true
+                    path: Path.join(__dirname, 'build'),
+                    listing:true
                 }
             }
             
