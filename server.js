@@ -42,7 +42,7 @@ server.route({
         }
     },
     method: "GET",
-    path: "/games",
+    path: "/api/games",
     handler: GameController.list
 });
 
@@ -172,3 +172,6 @@ const start = async function() {
 };
 
 start(); 
+app.listen(8080, () => {
+    console.log(`Find the server at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
+  });
