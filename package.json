@@ -2,6 +2,10 @@
   "name": "store-app",
   "version": "0.1.0",
   "private": true,
+  "engines" : {
+      "npm": "6.13.4",
+      "node": "12.16.1"
+  },
   "dependencies": {
     "@hapi/hapi": "^19.1.1",
     "@hapi/inert": "^6.0.1",
@@ -26,7 +30,7 @@
     "react-scripts": "3.4.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node deployServer.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
