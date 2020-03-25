@@ -1,6 +1,7 @@
 const Hapi = require("@hapi/hapi");
 const Mongoose = require("mongoose");
 const Joi = require("joi");
+const boom = require('@hapi/boom');
 var corsHeaders = require('hapi-cors-headers');
 const url = "mongodb+srv://ben:myxboxname1996@cluster0-wjntd.mongodb.net/store"
 const Path = require('path');
@@ -11,13 +12,23 @@ const MovieController = require("./src/controllers/movies");
 
 Mongoose.connect(url , {useNewUrlParser: true, useUnifiedTopology: true});
 
-
+const express = require('express');
+const path = require('path');
+const app = express();
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
 
 
 const server = new Hapi.server({
     port: process.env.PORT || 5000,
     host:'0.0.0.0',
-    
+    routes:  {
+        files: {
+            relativeTo: Path.join(__dirname, 'build')
+        }
+    }
 
 });
 
@@ -31,7 +42,7 @@ server.route({
         }
     },
     method: "GET",
-    path: "/inventory/games",
+    path: "/api/games",
     handler: GameController.list
 });
 
@@ -121,7 +132,6 @@ server.route({
 
 
 
-
 const start = async function() {
     try {
         await server.register({
@@ -131,17 +141,28 @@ const start = async function() {
             }
         })
         await server.register(require('@hapi/inert'));
+        
         server.route({
             method: 'GET',
-            path: '/{path*}',
+            path: '/{any*}',
             handler: {
                 directory: {
                     path: Path.join(__dirname, 'build'),
-                    listing:true
+                    listing:false,
+                    index:true
                 }
             }
             
         })
+        server.ext('onPreResponse', (req, h) => {
+            console.log('in1');
+            const { response } = req;
+            if (response.isBoom && response.output.statusCode === 404) {
+                console.log('in2');
+              return h.file('index.html');
+            }
+            return h.continue;
+          });
         await server.start();
         console.log('server started');
     } catch(err) {
