@@ -31,7 +31,7 @@ server.route({
         }
     },
     method: "GET",
-    path: "/games",
+    path: "/inventory/games",
     handler: GameController.list
 });
 

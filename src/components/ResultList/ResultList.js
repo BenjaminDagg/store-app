@@ -61,7 +61,7 @@ export class ResultList extends Component {
         console.log('query in func =  ' + query);
         var baseURLDev = 'http://localhost:5000';
         var baseURL = 'https://store-app-dagg.herokuapp.com'
-        axios.get('http://localhost:5000' + query)
+        axios.get('https://store-app-dagg.herokuapp.com/inventory/games')
         .then(res => {
             console.log(res);
             
