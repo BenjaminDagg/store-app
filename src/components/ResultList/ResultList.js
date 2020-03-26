@@ -22,7 +22,8 @@ export class ResultList extends Component {
     }
 
     componentDidMount() {
-        // https://store-app-dagg.herokuapp.com/products/movies
+        // https://store-app-dagg.herokuapp.com/products/movies 36
+         
         //parse the query to call api
         var url = window.location.href;
         console.log('url1 = ' + url)
@@ -57,6 +58,9 @@ export class ResultList extends Component {
         }
         console.log('url4 = ' + url);
         this.setState({category: category});
+        url = window.location.href;
+        url = url.substring(36,url.length)
+        console.log('url final = ' + url)
         this.getItems(url);
     }
 
