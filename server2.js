@@ -10,7 +10,7 @@ var http = require('http').Server(app);
 app.use(cors());
 
 //const dbUrl =  "mongodb+srv://ben:myxboxname1996@cluster0-wjntd.mongodb.net/store"
-const dbUrl =  "mongodb://ben:myxboxname1996@https://store-app-dagg.herokuapp.com:27017/store"
+const dbUrl =  "mongodb://ben:myxboxname1996@127.0.0.1:27017/store"
 //connect to mongodb database
 Mongoose.connect(dbUrl , {useNewUrlParser: true, useUnifiedTopology: true});
 const db   = Mongoose.connection;
@@ -38,4 +38,4 @@ app.get('*', (req, res)=>{
     res.sendFile(path.join(__dirname, '/build/index.html'));
 }); 
 
-http.listen(process.env.PORT || 5000  , () => console.log('Server started'));
+http.listen(process.env.PORT || 3000  , () => console.log('Server started'));
