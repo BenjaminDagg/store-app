@@ -45,7 +45,7 @@ export class ResultList extends Component {
             console.log('query = ' + query);
         }
         if (category === undefined) {
-            url = "/products";
+            url = "/products"  +  url;
             category = "all";
         }
         if (category === 'filter') {
@@ -59,9 +59,9 @@ export class ResultList extends Component {
 
     getItems(query) {
         console.log('query in func =  ' + query);
-        var baseURLDev = 'http://localhost:5000/api'  ;
-        var baseURL = 'https://store-app-dagg.herokuapp.com/api/games'
-        axios.get(baseURL)
+        var baseURLDev = 'http://localhost:5000'  ;
+        var baseURL = 'https://store-app-dagg.herokuapp.com'
+        axios.get(baseURL  + query)
         .then(res => {
             console.log(res);
             

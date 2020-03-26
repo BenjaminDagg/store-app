@@ -1,5 +1,61 @@
 var Album = require('../models/albums.js');
+const express = require('express');
+const albumRouter  = express.Router();
 
+module.exports = albumRouter;
+
+albumRouter.get('/', (req,res) => {
+    var params = req.query;
+    if (!params.name) {
+        params.name = ""
+    }
+    if (!params.genre) {
+        params.genre = ""
+    }
+    if (!params.artist) {
+        params.artist = ""
+    }
+    if (!params.priceMin) {
+        params.priceMin = -1000
+    }
+    else {
+        params.priceMin = parseFloat(params.priceMin)
+    }
+    if (!params.priceHigh) {
+        params.priceHigh = 1000
+    }
+    else {
+        params.priceHigh = parseFloat(params.priceHigh);
+    }
+    return Album.find({
+        $and:[
+            {'title':{"$regex": params.name,"$options":"i"}},
+            {'artist':{"$regex": params.artist,"$options":"i"}},
+            {'genre':{"$regex": params.genre,"$options":"i"}}
+        ]
+    }).exec().then((album) => {
+        var result = [];
+
+        //only get games in price range
+        album.forEach((element) => {
+            if (element.price >= params.priceMin && element.price <= params.priceHigh) {
+                result.push(element);
+            }
+        })
+        return res.json({data: result});
+    })
+})
+
+albumRouter.get('/:id', (req,res) => {
+    var id = req.params.id;
+    
+    return Album.find({'id':id}).exec().then((album) => {
+        if (album.length == 0) return res.json({error: 'Album Not Found'})
+        return res.json({data: album});
+    })
+})
+
+/*
 // GET LIST OF ALL albums
 exports.list = (req,h) => {
     return Album.find({}).exec().then((album) => {
@@ -71,3 +127,4 @@ exports.filter = (req,h) => {
     
     
 }
+*/

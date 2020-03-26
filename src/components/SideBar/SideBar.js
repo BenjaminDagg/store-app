@@ -57,7 +57,7 @@ export class SideBar extends Component {
             <div>
                 <h1>sidebar</h1>
                 
-                <form action={window.location.href + "/filter"}>
+                <form action={window.location.href}>
                     {this.props.category === 'games' &&
                         <div>
                             <div>
