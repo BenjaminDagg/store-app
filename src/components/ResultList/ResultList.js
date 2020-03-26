@@ -90,6 +90,7 @@ export class ResultList extends Component {
         }
         console.log('final url = ' + url);
         console.log('final cat = ' + category);
+        this.getItems(url);
 
     }
     }
