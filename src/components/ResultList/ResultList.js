@@ -90,6 +90,7 @@ export class ResultList extends Component {
         }
         console.log('final url = ' + url);
         console.log('final cat = ' + category);
+        this.setState({category:category});
         this.getItems(url);
 
     }
@@ -99,7 +100,7 @@ export class ResultList extends Component {
         console.log('query in func =  ' + query);
         var baseURLDev = 'http://localhost:5000'  ;
         var baseURL = 'https://store-app-dagg.herokuapp.com'
-        axios.get( baseURL  + query)
+        axios.get( baseURLDev  + query)
         .then(res => {
             console.log(res);
             
