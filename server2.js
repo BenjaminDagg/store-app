@@ -8,11 +8,11 @@ var http = require('http').Server(app);
 
 //enable cors for dev
 app.use(cors());
-
+//mongodb+srv://ben:myxboxname1996@cluster0-wjntd.mongodb.net/store?retryWrites=true&w=majority
 //const dbUrl =  "mongodb+srv://ben:myxboxname1996@cluster0-wjntd.mongodb.net/store"
 const dbUrl =  "mongodb://ben:myxboxname1996@127.0.0.1:27017/store"
 //connect to mongodb database
-Mongoose.connect(dbUrl , {useNewUrlParser: true, useUnifiedTopology: true});
+Mongoose.connect(process.env.DB_URL , {useNewUrlParser: true, useUnifiedTopology: true});
 const db   = Mongoose.connection;
 db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('connected to database'))
