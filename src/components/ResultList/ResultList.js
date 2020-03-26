@@ -6,6 +6,8 @@ import {FilterButton} from "../FilterButton/FilterButton.js";
 import {filterTypes} from "../../models/FilterTypes.js";
 import {SideBar} from "../SideBar/SideBar.js";
 
+const DEV = false;
+
 export class ResultList extends Component {
 
     constructor(props) {
@@ -23,7 +25,7 @@ export class ResultList extends Component {
 
     componentDidMount() {
         // https://store-app-dagg.herokuapp.com/products/movies 36
-         
+         if (DEV)  {
         //parse the query to call api
         var url = window.location.href;
         console.log('url1 = ' + url)
@@ -58,17 +60,45 @@ export class ResultList extends Component {
         }
         console.log('url4 = ' + url);
         this.setState({category: category});
-        url = window.location.href;
-        url = url.substring(36,url.length)
+        
+        //url = url.substring(36,url.length)
         console.log('url final = ' + url)
         this.getItems(url);
+    }   else {
+        var category = this.props.match.params.category;
+        console.log('cat = ' + category)
+        var url = window.location.href;
+        //remove heroku hostname
+        url = url.substring(36,url.length)
+        console.log('url = ' + url)
+        if (category  === undefined) {
+            category = "all";
+            
+        }
+        else if (category === "search") {
+            var searchQuery = new URLSearchParams(this.props.location.search);
+            var search = searchQuery.get('query');
+            url = "/products/search?query=" + search;
+            console.log('query = ' + query);
+        }
+        else if (category === "music") {
+            url = "/albums" + url.substring(9,url.length);
+            
+        }
+        else {
+            url  = url.substring(9,url.length);
+        }
+        console.log('final url = ' + url);
+        console.log('final cat = ' + category);
+
+    }
     }
 
     getItems(query) {
         console.log('query in func =  ' + query);
         var baseURLDev = 'http://localhost:5000'  ;
         var baseURL = 'https://store-app-dagg.herokuapp.com'
-        axios.get(baseURL  + query)
+        axios.get( baseURL  + query)
         .then(res => {
             console.log(res);
             
