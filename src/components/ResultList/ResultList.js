@@ -22,14 +22,17 @@ export class ResultList extends Component {
     }
 
     componentDidMount() {
-
+        // https://store-app-dagg.herokuapp.com/products/movies
         //parse the query to call api
         var url = window.location.href;
+        console.log('url1 = ' + url)
         //removes hostname from url // eslint-disable-next-line
         // eslint-disable-next-line
         url = "/" + url.replace (/^[a-z]{4,5}\:\/{2}[a-z]{1,}\:[0-9]{1,4}.(.*)/, '$1');
+        console.log('url2 = ' + url)
         //removes '/products' from url
         url = url.substring(9,url.length);
+        console.log('url3 = ' + url)
         //get category from url
         var category = this.props.match.params.category;
         console.log("category  = " + category);
@@ -52,7 +55,7 @@ export class ResultList extends Component {
             url = "/products" + url;
             category = "all";
         }
-        console.log('url = ' + url);
+        console.log('url4 = ' + url);
         this.setState({category: category});
         this.getItems(url);
     }
