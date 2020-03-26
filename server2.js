@@ -9,7 +9,8 @@ var http = require('http').Server(app);
 //enable cors for dev
 app.use(cors());
 
-const dbUrl =  "mongodb+srv://ben:myxboxname1996@cluster0-wjntd.mongodb.net/store"
+//const dbUrl =  "mongodb+srv://ben:myxboxname1996@cluster0-wjntd.mongodb.net/store"
+const dbUrl =  "mongodb://ben:myxboxname1996@https://store-app-dagg.herokuapp.com:27017/store"
 //connect to mongodb database
 Mongoose.connect(dbUrl , {useNewUrlParser: true, useUnifiedTopology: true});
 const db   = Mongoose.connection;
