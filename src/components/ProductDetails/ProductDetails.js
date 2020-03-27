@@ -35,7 +35,7 @@ export class ProductDetails extends Component {
     getProductInfo(query) {
         var devURL   = '';
         var prodURL = "https://store-app-dagg.herokuapp.com"
-        axios.get('http://localhost:5000' + query)
+        axios.get(prodURL + query)
         .then(res => {
             
             var product = res.data.data[0];
