@@ -74,7 +74,7 @@ export class ResultList extends Component {
         if (category  === "all") {
             category = "all";
             //remove  '/all' from url but keep queries
-            url = "/products"  +  url.substring(4,url.length);
+            url = "/products"  +  url.substring(12,url.length);
         }
         else if (category === "search") {
             var searchQuery = new URLSearchParams(this.props.location.search);
@@ -83,7 +83,7 @@ export class ResultList extends Component {
             console.log('query = ' + query);
         }
         else if (category === "music") {
-            url = "/albums" + url.substring(9,url.length);
+            url = "/albums" + url.substring(16,url.length);
             
         }
         else {
