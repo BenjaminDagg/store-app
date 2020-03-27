@@ -52,7 +52,7 @@ export class Header extends Component {
                         </button>
                         {this.state.productDropdownToggle  &&
                             <div id="product-dropdown" >
-                            <a href="/products" class="dropdown-item" to="/products/all">All Products</a>
+                            <a href="/products/all" class="dropdown-item" to="/products/all">All Products</a>
                             <a href="/products/games" class="dropdown-item" to="/products/games">Games</a>
                             <a class="dropdown-item" href="/products/movies">Movies</a>
                             <a href="/products/music" class="dropdown-item" to="/products/music">Music</a>

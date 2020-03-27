@@ -6,7 +6,7 @@ import {FilterButton} from "../FilterButton/FilterButton.js";
 import {filterTypes} from "../../models/FilterTypes.js";
 import {SideBar} from "../SideBar/SideBar.js";
 
-const DEV = false;
+const DEV = true;
 
 export class ResultList extends Component {
 
@@ -50,9 +50,9 @@ export class ResultList extends Component {
             url = "/products/search?query=" + search;
             console.log('query = ' + query);
         }
-        if (category === undefined) {
-            url = "/products"  +  url;
-            category = "all";
+        if (category === "all") {
+            url = "/products"  +  url.substring(4,url.length);
+            
         }
         if (category === 'filter') {
             url = "/products" + url;
@@ -71,9 +71,10 @@ export class ResultList extends Component {
         //remove heroku hostname
         url = url.substring(36,url.length)
         console.log('url = ' + url)
-        if (category  === undefined) {
+        if (category  === "all") {
             category = "all";
-            
+            //remove  '/all' from url but keep queries
+            url = "/products"  +  url.substring(4,url.length);
         }
         else if (category === "search") {
             var searchQuery = new URLSearchParams(this.props.location.search);
@@ -98,9 +99,9 @@ export class ResultList extends Component {
 
     getItems(query) {
         console.log('query in func =  ' + query);
-        var baseURLDev = 'http://localhost:5000'  ;
+        var baseURLDev = 'http://localhost:3000'  ;
         var baseURL = 'https://store-app-dagg.herokuapp.com'
-        axios.get( baseURL  + query)
+        axios.get( baseURLDev  + query)
         .then(res => {
             console.log(res);
             
