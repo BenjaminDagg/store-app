@@ -47,7 +47,7 @@ export class ResultList extends Component {
         if (category === "search") {
             var searchQuery = new URLSearchParams(this.props.location.search);
             var search = searchQuery.get('query');
-            url = "/products/search?query=" + search;
+            url = "/products?query=" + search;
             console.log('query = ' + query);
         }
         if (category === "all") {
@@ -79,7 +79,7 @@ export class ResultList extends Component {
         else if (category === "search") {
             var searchQuery = new URLSearchParams(this.props.location.search);
             var search = searchQuery.get('query');
-            url = "/products/search?query=" + search;
+            url = "/products?query=" + search;
             console.log('query = ' + query);
         }
         else if (category === "music") {

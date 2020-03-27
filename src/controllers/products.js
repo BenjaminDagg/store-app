@@ -31,6 +31,58 @@ productRouter.get('/', async (req,res) => {
     var albums = await Album.find().exec();
     var  movies = await Movie.find().exec();
 
+    if (params.query)  {
+
+        var query = req.query.query;
+
+        games.forEach((game) => {
+            if (game.title.toLowerCase().includes(query) ||
+                game.developer.toLowerCase().includes(query) ||
+                query.toLowerCase().includes("game")) {
+                    result.push(game);
+                }
+        })
+        albums.forEach((album) => {
+            if (album.artist.toLowerCase().includes(query) ||
+                album.title.toLowerCase().includes(query) ||
+                query.toLowerCase().includes("music") ||
+                query.toLowerCase().includes("song") ||
+                query.toLowerCase().includes("album")) {
+                    result.push(album);
+                }
+        })
+        movies.forEach((movie)  => {
+            var wasAdded = false ;
+            if (movie.title.toLowerCase().includes(query) ||
+                movie.director.toLowerCase().includes(query)  ||
+                query.toLowerCase().includes("movie")   ||
+                movie.actors.includes(query))  {
+                    result.push(movie);
+                    wasAdded = true;
+            }
+            if (!wasAdded ){
+                 var actors = movie.actors;
+                 actors.forEach((actor)  => {
+                     if (actor.toLowerCase().includes(query) && !wasAdded) {
+                         result.push(movie);
+                         wasAdded  = true;
+                     }
+                 })
+            }
+            
+        })
+
+        var products = [];
+
+        //only get games in price range
+        result.forEach((element) => {
+            if (element.price >= params.priceMin && element.price <= params.priceHigh) {
+                products.push(element);
+            }
+        })
+
+        res.json({data:products});
+    }
     
     var temp = games.concat(albums);
     var result = temp.concat(movies);
@@ -47,57 +99,7 @@ productRouter.get('/', async (req,res) => {
     res.json({data:products});
 })
 
-productRouter.get('/search', async (req,res) => {
-    var query = req.query.query;
-    var params = req.query;
-    
-    console.log(params);
-    var result = [];
-    var games =  await Game.find().exec();
-    var albums = await Album.find().exec();
-    var  movies = await Movie.find().exec();
 
-    games.forEach((game) => {
-        if (game.title.toLowerCase().includes(query) ||
-            game.developer.toLowerCase().includes(query) ||
-            query.toLowerCase().includes("game")) {
-                result.push(game);
-            }
-    })
-    albums.forEach((album) => {
-        if (album.artist.toLowerCase().includes(query) ||
-            album.title.toLowerCase().includes(query) ||
-            query.toLowerCase().includes("music") ||
-            query.toLowerCase().includes("song") ||
-            query.toLowerCase().includes("album")) {
-                result.push(album);
-            }
-    })
-    movies.forEach((movie)  => {
-        var wasAdded = false ;
-        if (movie.title.toLowerCase().includes(query) ||
-            movie.director.toLowerCase().includes(query)  ||
-            query.toLowerCase().includes("movie")   ||
-            movie.actors.includes(query))  {
-                result.push(movie);
-                wasAdded = true;
-        }
-        if (!wasAdded ){
-             var actors = movie.actors;
-             actors.forEach((actor)  => {
-                 if (actor.toLowerCase().includes(query) && !wasAdded) {
-                     result.push(movie);
-                     wasAdded  = true;
-                 }
-             })
-        }
-        
-    })
-    
-    
-
-     res.json({data:result});
-})
 
 /*
 // GET LIST OF ALL products
