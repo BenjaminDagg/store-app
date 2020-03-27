@@ -6,7 +6,7 @@ import {FilterButton} from "../FilterButton/FilterButton.js";
 import {filterTypes} from "../../models/FilterTypes.js";
 import {SideBar} from "../SideBar/SideBar.js";
 
-const DEV = true;
+const DEV = false;
 
 export class ResultList extends Component {
 
@@ -101,7 +101,7 @@ export class ResultList extends Component {
         console.log('query in func =  ' + query);
         var baseURLDev = 'http://localhost:3000'  ;
         var baseURL = 'https://store-app-dagg.herokuapp.com'
-        axios.get( baseURLDev  + query)
+        axios.get( baseURL  + query)
         .then(res => {
             console.log(res);
             
