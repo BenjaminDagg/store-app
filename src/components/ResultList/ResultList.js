@@ -83,7 +83,7 @@ export class ResultList extends Component {
             console.log('query = ' + query);
         }
         else if (category === "music") {
-            url = "/albums" + url.substring(16,url.length);
+            url = "/albums" + url.substring(15,url.length);
             
         }
         else {
