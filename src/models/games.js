@@ -8,7 +8,8 @@ const GameModel = new Schema({
     genre: String,
     platform: [String],
     price: Number,
-    type: String
+    type: String,
+    score:  Number
 });
 
 module.exports = Mongoose.model("Game", GameModel,'games');

@@ -7,7 +7,8 @@ const AlbumModel = new Schema({
     title: String,
     type: String,
     price: Number,
-    genre: String
+    genre: String,
+    score: Number
 });
 
 module.exports = Mongoose.model("Album", AlbumModel,'albums');

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Catalog.css";
 import {filterTypes} from "../../models/FilterTypes.js";
+import {CatalogItem} from "../CatalogItem/CatalogItem.js";
 // eslint-disable-next-line
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
@@ -42,6 +43,7 @@ export class Catalog extends Component {
             })
         }
 
+        /*
         var list = propItems.map((item) => {
             return <div class="col-12 col-md-3">
                 <Link style={{ 'textDecoration': 'none','color':'black' }} to={"/product/" + item.type + "/" +  item.id}>
@@ -51,6 +53,15 @@ export class Catalog extends Component {
                 </div>
                 </Link>
             </div>
+        })
+        */
+       var list = propItems.map((item) => {
+        return <div class="col-12 col-md-3">
+            
+            <Link style={{ 'textDecoration': 'none','color':'black' }} to={"/product/" + item.type + "/" +  item.id}>
+                <CatalogItem item={item} />
+            </Link>
+        </div>
         })
 
         return list;

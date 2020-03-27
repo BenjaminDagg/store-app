@@ -9,8 +9,27 @@
 }
 
 .catalog-item {
-    
-    background-color: lightpink;
-    height: 150px;
+    text-align:left;
+    border: 1px solid lightslategray;
+    border-radius:  4px;
+    height: 200px;
     margin: 15px;
+    padding: 10px;
+}
+
+.item-description {
+    
+    text-align:left;
+}
+
+
+.item-platforms {
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.catalog-item span {
+    display: inline-block;
 }
