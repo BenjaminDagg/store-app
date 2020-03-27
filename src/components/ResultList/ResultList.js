@@ -74,7 +74,7 @@ export class ResultList extends Component {
         if (category  === "all") {
             category = "all";
             //remove  '/all' from url but keep queries
-            url = "/products"  +  url.substring(12,url.length);
+            url = "/products"  +  url.substring(13,url.length);
         }
         else if (category === "search") {
             var searchQuery = new URLSearchParams(this.props.location.search);
