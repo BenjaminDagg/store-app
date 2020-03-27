@@ -45,7 +45,8 @@ movieRouter.get('/', (req,res) => {
         $and:[
             {'title':{"$regex": params.name,"$options":"i"}},
             {'rating':{"$regex": params. rating,"$options":"i"}},
-            {'genre':{"$regex": params.genre,"$options":"i"}}
+            {'genre':{"$regex": params.genre,"$options":"i"}},
+            {'score':{"$gte": params.score}}
         ]
     }).exec().then((movie) => {
         var result = [];

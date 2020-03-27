@@ -1,3 +1,37 @@
 .price-input {
     width: 50px;
 }
+
+.score-input {
+    width:150px;
+    text-align:left;
+    
+}
+
+.score-input input {
+    position:absolute;
+    right:0;
+   
+}
+
+#score-input-div {
+    width: 150px;
+    margin: 0 auto;
+    
+}
+
+#score-input-div {
+    text-align:left;
+}
+
+#score-input-div span {
+    width:90%;
+}
+#score-input-div input {
+    width:10%;
+    float:right;
+}
+
+h6 {
+    text-align:center;
+}

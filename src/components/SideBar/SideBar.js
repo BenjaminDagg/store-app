@@ -102,6 +102,28 @@ export class SideBar extends Component {
                             
                         </div>
                     }
+                    {this.props.category  === 'movies' &&
+                        
+                        <div>
+                            <div id="score-input-div">
+                                <h6>Score</h6>
+                                <span  className="score-input">⭐⭐⭐⭐⭐</span><input  className="score-input"  type="radio" id="5" name="score" value="5"/><br/>
+                                <span  className="score-input">⭐⭐⭐⭐</span><input className="score-input" type="radio" id="4" name="score" value="4"/><br/>
+                                <span className="score-input">⭐⭐⭐</span><input className="score-input" type="radio" id="3" name="score" value="3"/><br/>
+                                <span className="score-input">⭐⭐</span><input className="score-input" type="radio" id="2" name="score" value="2"/><br/>
+                                <span className="score-input">⭐</span><input className="score-input" type="radio" id="1" name="score" value="1"/>
+                            </div>
+                            <div>
+                                <h6>Rating</h6>
+                                <label for="ratingR">R</label>
+                                <input type="radio" name="rating" id="ratingR" value="R"></input>
+                                <label for="ratingPG13" >PG 13</label>
+                                <input type="radio" name="rating"  id="ratingPG13" value="PG13"></input>
+                            </div>
+                        </div>
+
+                    }
+                    
                     <div>
                         <h6>Price</h6>
                         <input className="price-input" type="text" name="priceMin" id="priceMin" placeholder="min."></input>

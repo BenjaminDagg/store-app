@@ -10,9 +10,9 @@ var http = require('http').Server(app);
 app.use(cors());
 //mongodb+srv://ben:myxboxname1996@cluster0-wjntd.mongodb.net/store?retryWrites=true&w=majority
 const dbUrl =  "mongodb+srv://ben:myxboxname1996@cluster0-wjntd.mongodb.net/store"
-//Mongoose.connect(dbUrl , {useNewUrlParser: true, useUnifiedTopology: true});
+Mongoose.connect(dbUrl , {useNewUrlParser: true, useUnifiedTopology: true});
 //connect to mongodb database
-Mongoose.connect(process.env.DB_URL , {useNewUrlParser: true, useUnifiedTopology: true});
+//Mongoose.connect(process.env.DB_URL , {useNewUrlParser: true, useUnifiedTopology: true});
 const db   = Mongoose.connection;
 db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('connected to database'))
