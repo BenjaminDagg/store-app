@@ -23,12 +23,13 @@ export class CatalogItem extends Component {
         var container = document.getElementById(this.props.item.id);
         var rating = this.props.item.score;
         console.log('container is ' + container);
+        var text = "";
         for(var i = 1; i <= rating;i++) {   
-            var text = container.innerHTML;
+            
             text += "&#11088";
-            container.innerHTML = text;
+            
         }
-
+        container.innerHTML = text;
         
     }
 
